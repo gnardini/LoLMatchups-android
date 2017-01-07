@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:title="@string/app_name"
+        android:background="@color/colorPrimary"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white"
+        >
+
+        <TextView
+            android:id="@+id/region_chooser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_horizontal"
+            android:layout_marginRight="12dp"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            tools:text="NA"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        >
+
+        <EditText
+            android:id="@+id/summoner_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="100dp"
+            android:hint="Summoner name"
+            android:textColor="@color/text_black"
+            android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            />
+
+        <ImageView
+            android:id="@+id/summoner_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="-4dp"
+            android:layout_gravity="right"
+            android:padding="12dp"
+            android:src="@drawable/ic_search_black"
+            />
+
+        <ImageView
+            android:id="@+id/summoner_delete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="-4dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="48dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_close_black"
+            />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            android:id="@+id/results_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/team_results"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/top_matchup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/jungle_matchup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/mid_matchup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/adc_matchup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <com.gnardini.lolmatchups.ui.mathups.RoleMatchupView
+                    android:id="@+id/support_matchup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ProgressBar
+            android:id="@+id/loading_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/error_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:textColor="@color/text_black"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:visibility="gone"
+            />
+
+    </FrameLayout>
+
+</LinearLayout>
