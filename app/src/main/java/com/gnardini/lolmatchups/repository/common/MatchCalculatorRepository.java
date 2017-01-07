@@ -123,7 +123,11 @@ public class MatchCalculatorRepository {
                                     matchupInfo.getGamesPlayed());
                             enemyTeam.put(role, enemyInGameChampion);
                             if (enemyTeam.size() == 5) {
-                                calculateTeamWinRates(friendlyTeam, enemyTeam, repoCallback);
+                                calculateTeamWinRates(
+                                        gameChampionRoles.getChampionSummoners(),
+                                        friendlyTeam,
+                                        enemyTeam,
+                                        repoCallback);
                             }
                         }
 
@@ -136,6 +140,7 @@ public class MatchCalculatorRepository {
     }
 
     private void calculateTeamWinRates(
+            Map<String, String> championSummoners,
             Map<Role, InGameChampion> friendlyTeam,
             Map<Role, InGameChampion> enemyTeam,
             RepoCallback<GameData> repoCallback) {
@@ -144,12 +149,13 @@ public class MatchCalculatorRepository {
         for (Role role : Role.values()) {
             InGameChampion friendlyChampion = friendlyTeam.get(role);
             friendlyTeamWinRate +=
-                    ((double) friendlyChampion.getGames() / totalGames) * friendlyChampion.getWinRate();
+                    ((double) friendlyChampion.getGames() / totalGames)
+                            * friendlyChampion.getWinRate();
         }
 
         GameTeam friendlyGameTeam = new GameTeam(friendlyTeam, friendlyTeamWinRate);
         GameTeam enemyGameTeam = new GameTeam(enemyTeam, 100 - friendlyTeamWinRate);
-        repoCallback.onSuccess(new GameData(friendlyGameTeam, enemyGameTeam));
+        repoCallback.onSuccess(new GameData(championSummoners, friendlyGameTeam, enemyGameTeam));
     }
 
     private void fetchMatchupInfoForRole(

@@ -1,13 +1,24 @@
 package com.gnardini.lolmatchups.model;
 
+import java.util.Map;
+
 public class GameData {
 
-    private GameTeam friendlyTeam;
-    private GameTeam enemyTeam;
+    private final Map<String, String> championSummoners;
+    private final GameTeam friendlyTeam;
+    private final GameTeam enemyTeam;
 
-    public GameData(GameTeam friendlyTeam, GameTeam enemyTeam) {
+    public GameData(
+            Map<String, String> championSummoners,
+            GameTeam friendlyTeam,
+            GameTeam enemyTeam) {
+        this.championSummoners = championSummoners;
         this.friendlyTeam = friendlyTeam;
         this.enemyTeam = enemyTeam;
+    }
+
+    public Map<String, String> getChampionSummoners() {
+        return championSummoners;
     }
 
     public GameTeam getFriendlyTeam() {

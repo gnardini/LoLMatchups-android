@@ -27,10 +27,23 @@
         
         <ImageView
             android:id="@+id/champion_1_icon"
-            android:layout_width="0dp"
+            android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_weight="1"
             android:scaleType="fitStart"
+            />
+
+        <TextView
+            android:id="@+id/summoner_1_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text_gray"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             />
 
         <TextView
@@ -39,8 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/text_black"
-            android:textSize="18sp"
-            android:padding="8dp"
+            android:textSize="16sp"
+            android:padding="6dp"
             tools:text="51.5%"
             />
 
@@ -50,16 +63,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:textColor="@color/text_black"
-            android:textSize="18sp"
-            android:padding="8dp"
+            android:textSize="16sp"
+            android:padding="6dp"
             tools:text="48.5%"
+            />
+
+        <TextView
+            android:id="@+id/summoner_2_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/text_gray"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
             />
 
         <ImageView
             android:id="@+id/champion_2_icon"
-            android:layout_width="0dp"
+            android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_weight="1"
             android:scaleType="fitEnd"
             />
 

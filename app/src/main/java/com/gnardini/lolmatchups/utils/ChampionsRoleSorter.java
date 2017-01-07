@@ -20,7 +20,8 @@ public class ChampionsRoleSorter {
                 assignTeamRoles(gameChampionNames.getFriendlyTeam(), championRoles);
         Map<Role, String> enemyTeamRoles =
             assignTeamRoles(gameChampionNames.getEnemyTeam(), championRoles);
-        return new GameChampionRoles(friendlyTeamRoles, enemyTeamRoles);
+        return new GameChampionRoles(
+                gameChampionNames.getChampionSummoners(), friendlyTeamRoles, enemyTeamRoles);
     }
 
     private Map<Role, String> assignTeamRoles(
@@ -29,8 +30,9 @@ public class ChampionsRoleSorter {
         Map<Role, String> assignedRoles = new HashMap<>();
 
         // This is an edge case that should correct itself shortly. If there's a Ziggs in the game
-        // and no ADC, set Ziggs as ADC.
+        // and no ADC, set Ziggs as ADC. Same for Malzahar support.
         checkZiggsAdc(assignedRoles, championRoles, championNames);
+        checkMalzaharSupport(assignedRoles, championRoles, championNames);
 
         // Set all roles that can be logically inferred.
         while (assignChampionsWithOneRole(assignedRoles, championRoles, championNames)
@@ -47,11 +49,24 @@ public class ChampionsRoleSorter {
         return assignedRoles;
     }
 
+    private void checkMalzaharSupport(
+            Map<Role, String> assignedRoles,
+            Map<String, List<ChampionRole>> championRoles,
+            List<String> championNames) {
+        if (!thereIsRole(championRoles, championNames, Role.SUPPORT)) {
+            for (String championName : championNames) {
+                if (championName.equals("Malzahar")) {
+                    assignedRoles.put(Role.SUPPORT, "Malzahar");
+                }
+            }
+        }
+    }
+
     private void checkZiggsAdc(
             Map<Role, String> assignedRoles,
             Map<String, List<ChampionRole>> championRoles,
             List<String> championNames) {
-        if (!thereIsAdc(championRoles, championNames)) {
+        if (!thereIsRole(championRoles, championNames, Role.ADC)) {
             for (String championName : championNames) {
                 if (championName.equals("Ziggs")) {
                     assignedRoles.put(Role.ADC, "Ziggs");
@@ -60,12 +75,13 @@ public class ChampionsRoleSorter {
         }
     }
 
-    private boolean thereIsAdc(
+    private boolean thereIsRole(
             Map<String, List<ChampionRole>> championRoles,
-            List<String> championNames) {
+            List<String> championNames,
+            Role role) {
         for (String championName : championNames) {
             for (ChampionRole championRole : championRoles.get(championName)) {
-                if (championRole.getRole() == Role.ADC) {
+                if (championRole.getRole() == role) {
                     return true;
                 }
             }

@@ -23,6 +23,8 @@ public class RoleMatchupView extends LinearLayout {
     TextView roleName;
     TextView champion1WinRate;
     TextView champion2WinRate;
+    TextView summoner1Name;
+    TextView summoner2Name;
     ImageView champion1Icon;
     ImageView champion2Icon;
 
@@ -47,6 +49,8 @@ public class RoleMatchupView extends LinearLayout {
         roleName = (TextView) findViewById(R.id.role_name);
         champion1WinRate = (TextView) findViewById(R.id.champion_1_winrate);
         champion2WinRate = (TextView) findViewById(R.id.champion_2_winrate);
+        summoner1Name = (TextView) findViewById(R.id.summoner_1_name);
+        summoner2Name = (TextView) findViewById(R.id.summoner_2_name);
         champion1Icon = (ImageView) findViewById(R.id.champion_1_icon);
         champion2Icon = (ImageView) findViewById(R.id.champion_2_icon);
 
@@ -64,6 +68,11 @@ public class RoleMatchupView extends LinearLayout {
         Glide.with(getContext())
                 .load(String.format(Configuration.CHAMPION_ICON_URL, champion2.getName()))
                 .into(champion2Icon);
+
+        summoner1Name.setText(gameData.getChampionSummoners().get(champion1.getName()));
+        summoner2Name.setText(gameData.getChampionSummoners().get(champion2.getName()));
+        summoner1Name.setSelected(true);
+        summoner2Name.setSelected(true);
 
         if (champion1.getGames() > 0) {
             champion1WinRate.setText(String.format("%.02f%%", champion1.getWinRate()));

@@ -14,6 +14,7 @@ import com.gnardini.lolmatchups.repository.riot.model.GameParticipant;
 import com.gnardini.lolmatchups.repository.riot.model.SummonerId;
 import com.gnardini.lolmatchups.repository.riot.services.SummonerService;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -113,10 +114,15 @@ public class SummonerRepository {
             return null;
         }
 
+        Map<String, String> championSummoners = new HashMap<>();
+
         // Calculate teams ids.
         int team1Id = participants.get(0).getTeamId();
         int team2Id = -1;
         for (GameParticipant participant : participants) {
+            championSummoners.put(
+                    championsRepository.getChampionName(participant.getChampionId()),
+                    participant.getSummonerName());
             if (participant.getTeamId() != team1Id) {
                 team2Id = participant.getTeamId();
             }
@@ -124,7 +130,7 @@ public class SummonerRepository {
 
         List<String> team1Champions = championsOfTeam(participants, team1Id);
         List<String> team2Champions = championsOfTeam(participants, team2Id);
-        return new GameChampionNames(team1Champions, team2Champions);
+        return new GameChampionNames(championSummoners, team1Champions, team2Champions);
     }
 
     private List<String> championsOfTeam(List<GameParticipant> participants, int teamId) {
