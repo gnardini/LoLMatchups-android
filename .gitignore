@@ -4,6 +4,7 @@ SecretConfig.java
 # Created by https://www.gitignore.io/api/osx,macos,gradle,android,windows,linux,intellij,java
 
 .idea/
+app/keystore.gradle
 
 ### OSX ###
 *.DS_Store
